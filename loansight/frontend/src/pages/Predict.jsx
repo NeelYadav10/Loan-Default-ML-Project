@@ -18,6 +18,7 @@ export default function Predict() {
   const [formData, setFormData] = useState(DEFAULT_FORM_VALUES);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [slowNotice, setSlowNotice] = useState(false);
   const [result, setResult] = useState(null);
   const [predictedInputs, setPredictedInputs] = useState(null);
   const [apiError, setApiError] = useState(null);
@@ -108,7 +109,12 @@ export default function Predict() {
     setResult(null);
     setPredictedInputs(null);
     setLoading(true);
+    setSlowNotice(false);
     setApiError(null);
+
+    const timer = setTimeout(() => {
+      setSlowNotice(true);
+    }, 5000);
 
     const snapshotInputs = { ...formData };
 
@@ -134,9 +140,11 @@ export default function Predict() {
       console.error('Prediction API error:', err);
       setApiError(
         err.response?.data?.detail || 
-        'Failed to connect to backend server on port 8001. Ensure run_backend.bat is running.'
+        'Failed to connect to backend service. If the server was idle, please retry as it wakes up.'
       );
     } finally {
+      clearTimeout(timer);
+      setSlowNotice(false);
       setLoading(false);
     }
   };
@@ -746,24 +754,31 @@ export default function Predict() {
                         <ChevronRight className="w-4 h-4" />
                       </button>
                     ) : (
-                      <button
-                        type="button"
-                        onClick={handleSubmit}
-                        disabled={loading}
-                        className="flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-tealAccent to-emerald-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-tealAccent/25 hover:shadow-xl transition-all"
-                      >
-                        {loading ? (
-                          <>
-                            <RefreshCw className="w-4 h-4 animate-spin" />
-                            Evaluating 16 Risk Signals...
-                          </>
-                        ) : (
-                          <>
-                            <Sparkle className="w-4 h-4" />
-                            Run Default Prediction
-                          </>
+                      <div className="flex flex-col items-end gap-1">
+                        <button
+                          type="button"
+                          onClick={handleSubmit}
+                          disabled={loading}
+                          className="flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-tealAccent to-emerald-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-tealAccent/25 hover:shadow-xl transition-all"
+                        >
+                          {loading ? (
+                            <>
+                              <RefreshCw className="w-4 h-4 animate-spin" />
+                              Evaluating 16 Risk Signals...
+                            </>
+                          ) : (
+                            <>
+                              <Sparkle className="w-4 h-4" />
+                              Run Default Prediction
+                            </>
+                          )}
+                        </button>
+                        {loading && slowNotice && (
+                          <p className="text-xs text-amber-600 font-medium animate-pulse">
+                            Waking up the server, this may take up to a minute…
+                          </p>
                         )}
-                      </button>
+                      </div>
                     )}
                   </div>
                 </motion.div>

@@ -24,10 +24,15 @@ const FEATURE_TABLE_DATA = [
 export default function About() {
   const [modelInfo, setModelInfo] = useState(null);
   const [metricsLoading, setMetricsLoading] = useState(true);
+  const [slowNotice, setSlowNotice] = useState(false);
   const [metricsError, setMetricsError] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
+    const timer = setTimeout(() => {
+      if (isMounted) setSlowNotice(true);
+    }, 5000);
+
     const fetchInfo = async () => {
       try {
         const data = await getModelInfo();
@@ -42,12 +47,17 @@ export default function About() {
         }
       } finally {
         if (isMounted) {
+          clearTimeout(timer);
+          setSlowNotice(false);
           setMetricsLoading(false);
         }
       }
     };
     fetchInfo();
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   const metrics = modelInfo?.metrics || null;
@@ -122,12 +132,17 @@ export default function About() {
           <div className="py-8 text-center space-y-3">
             <RefreshCw className="w-6 h-6 text-tealAccent animate-spin mx-auto" />
             <span className="text-xs text-ink-muted block">Loading real test set metrics from server...</span>
+            {slowNotice && (
+              <span className="text-xs font-medium text-amber-600 block animate-pulse">
+                Waking up the server, this may take up to a minute…
+              </span>
+            )}
           </div>
         ) : metricsError || !metrics ? (
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-center text-xs text-ink-muted space-y-1">
             <Info className="w-5 h-5 text-amber-500 mx-auto mb-1" />
             <p className="font-semibold text-ink">Live Test Metrics Temporarily Offline</p>
-            <p>Showing static specifications below. Connect to backend port 8001 to view live JSON metrics.</p>
+            <p>Showing static specifications below. Connect to backend to view live JSON metrics.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 text-center">

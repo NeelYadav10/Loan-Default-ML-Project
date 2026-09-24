@@ -37,11 +37,11 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS setup with origin regex for local dev ports
+# CORS setup with origin regex for Vercel preview builds & local dev ports
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1):(517[0-9]|3000|800[0-9])",
+    allow_origin_regex=r"https://.*\.vercel\.app|http://(localhost|127\.0\.0\.1):(517[0-9]|3000|800[0-9])",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

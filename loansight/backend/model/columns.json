@@ -1,0 +1,134 @@
+{
+  "feature_order": [
+    "Age",
+    "Income",
+    "LoanAmount",
+    "CreditScore",
+    "MonthsEmployed",
+    "NumCreditLines",
+    "InterestRate",
+    "LoanTerm",
+    "DTIRatio",
+    "Education",
+    "EmploymentType",
+    "MaritalStatus",
+    "HasMortgage",
+    "HasDependents",
+    "LoanPurpose",
+    "HasCoSigner"
+  ],
+  "numerical_cols": [
+    "Age",
+    "Income",
+    "LoanAmount",
+    "CreditScore",
+    "MonthsEmployed",
+    "NumCreditLines",
+    "InterestRate",
+    "LoanTerm",
+    "DTIRatio"
+  ],
+  "categorical_cols": [
+    "Education",
+    "EmploymentType",
+    "MaritalStatus",
+    "HasMortgage",
+    "HasDependents",
+    "LoanPurpose",
+    "HasCoSigner"
+  ],
+  "categorical_mappings": {
+    "Education": {
+      "Bachelor's": 0,
+      "High School": 1,
+      "Master's": 2,
+      "PhD": 3
+    },
+    "EmploymentType": {
+      "Full-time": 0,
+      "Part-time": 1,
+      "Self-employed": 2,
+      "Unemployed": 3
+    },
+    "MaritalStatus": {
+      "Divorced": 0,
+      "Married": 1,
+      "Single": 2
+    },
+    "HasMortgage": {
+      "No": 0,
+      "Yes": 1
+    },
+    "HasDependents": {
+      "No": 0,
+      "Yes": 1
+    },
+    "LoanPurpose": {
+      "Auto": 0,
+      "Business": 1,
+      "Education": 2,
+      "Home": 3,
+      "Other": 4
+    },
+    "HasCoSigner": {
+      "No": 0,
+      "Yes": 1
+    }
+  },
+  "iqr_bounds": {
+    "Age": [
+      -6.5,
+      93.5
+    ],
+    "Income": [
+      -52229.5,
+      217294.5
+    ],
+    "LoanAmount": [
+      -118611.5,
+      373640.5
+    ],
+    "CreditScore": [
+      24.5,
+      1124.5
+    ],
+    "MonthsEmployed": [
+      -60.0,
+      180.0
+    ],
+    "NumCreditLines": [
+      -1.0,
+      7.0
+    ],
+    "InterestRate": [
+      -9.459999999999999,
+      36.459999999999994
+    ],
+    "LoanTerm": [
+      -12.0,
+      84.0
+    ],
+    "DTIRatio": [
+      -0.3,
+      1.2999999999999998
+    ]
+  },
+  "reference_baselines": {
+    "Age": 44.0,
+    "Income": 82519.0,
+    "LoanAmount": 127400.0,
+    "CreditScore": 574.0,
+    "MonthsEmployed": 60.0,
+    "NumCreditLines": 3.0,
+    "InterestRate": 13.45,
+    "LoanTerm": 36.0,
+    "DTIRatio": 0.5,
+    "Education": "Bachelor's",
+    "EmploymentType": "Part-time",
+    "MaritalStatus": "Married",
+    "HasMortgage": "Yes",
+    "HasDependents": "Yes",
+    "LoanPurpose": "Business",
+    "HasCoSigner": "Yes"
+  }
+}

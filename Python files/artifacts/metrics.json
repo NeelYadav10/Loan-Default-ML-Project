@@ -1,0 +1,64 @@
+{
+  "algorithm": "GradientBoostingClassifier",
+  "hyperparameters": {
+    "n_estimators": 150,
+    "learning_rate": 0.1,
+    "max_depth": 4,
+    "random_state": 42
+  },
+  "sklearn_version": "1.6.1",
+  "dataset_info": {
+    "total_records": 255347,
+    "train_size": 204277,
+    "test_size": 51070,
+    "features_count": 16
+  },
+  "metrics": {
+    "accuracy": 0.8864303896612493,
+    "precision": 0.5881561238223418,
+    "recall": 0.0736806609340752,
+    "f1_score": 0.13095594845669764,
+    "roc_auc": 0.7582759343384028,
+    "confusion_matrix": [
+      [
+        44833,
+        306
+      ],
+      [
+        5494,
+        437
+      ]
+    ]
+  },
+  "probability_distribution": {
+    "p10": 0.029698892463767484,
+    "p25": 0.04636453778031602,
+    "p50": 0.08035802296799983,
+    "p75": 0.146879101327462,
+    "p90": 0.251284477744124,
+    "mean": 0.11689448235082787,
+    "std": 0.1086483861656047
+  },
+  "risk_cutoffs": {
+    "low_threshold": 0.3,
+    "high_threshold": 0.6
+  },
+  "feature_importances": {
+    "Age": 0.25930754296869474,
+    "Income": 0.20059396078041514,
+    "InterestRate": 0.18730877685969563,
+    "LoanAmount": 0.13921044525101953,
+    "MonthsEmployed": 0.10461046271470978,
+    "CreditScore": 0.02130032309625521,
+    "EmploymentType": 0.020595438126708526,
+    "HasCoSigner": 0.013032449742700479,
+    "HasDependents": 0.011506487673391522,
+    "DTIRatio": 0.008519553884949481,
+    "Education": 0.00842410107096116,
+    "NumCreditLines": 0.008250148225551193,
+    "MaritalStatus": 0.006562361827677313,
+    "LoanPurpose": 0.005458731073210968,
+    "HasMortgage": 0.004186471060951647,
+    "LoanTerm": 0.0011327456431076712
+  }
+}
